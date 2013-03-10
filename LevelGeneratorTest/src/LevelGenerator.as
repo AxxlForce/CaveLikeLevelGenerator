@@ -1,7 +1,7 @@
 package 
 {
 	/**
-	 * this is a factory class for creating cave like leves
+	 * this is a factory class for creating cave like levels
 	 * 
 	 * however in it's current configuration there is no guarantee of connectedness...
 	 */
@@ -13,16 +13,8 @@ package
 		
 		private var size_x:int;
 		private var size_y:int;
-		private var FILL_PROBABILITY:Number;
 		
-		/**
-		 * set default values
-		 */
-		public function LevelGenerator()
-		{
-			// default value
-			FILL_PROBABILITY = 0.4;	// means 40%
-		}
+		private const FILL_PROBABILITY:Number = 0.4;
 		
 		/**
 		 * this method returns newly calculated level
@@ -36,16 +28,22 @@ package
 			
 			this.initMap();
 			
+			// this is the configuration suggested by the author of the algorithm... ok for now
+			//
+			//	Winit(p) = rand[0,100) < 40
+			//	Repeat 4: W?(p) = R1(p) ? 5 || R2(p) ? 2
+			//	Repeat 3: W?(p) = R1(p) ? 5 
+			
 			for (var i:int = 0; i < 4; i++) 
 			{
 				this.processAlgorithm(5, 2);
 			}
-			
 			for (var j:int = 0; j < 3; j++) 
 			{
-				this.processAlgorithm(5, 0);
+				this.processAlgorithm(5, -1);
 			}
-
+			
+			// level creation done!
 			return grid;
 		}
 		
@@ -55,7 +53,7 @@ package
 		private function getRandomTileForPosition(x:int, y:int):Tile
 		{
 			var randomRounded : Number = Math.random();
-
+			
 			if (randomRounded < FILL_PROBABILITY) 
 			{
 				return new Tile(true, x, y);
@@ -65,7 +63,7 @@ package
 				return new Tile(false, x, y);
 			}
 		}
-			
+		
 		/**
 		 * allocates array and fills it with initial values
 		 */
