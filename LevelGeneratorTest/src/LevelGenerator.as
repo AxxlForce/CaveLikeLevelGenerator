@@ -8,8 +8,8 @@ package
 	public class LevelGenerator
 	{
 		// member variables
-		private var grid:Array;
-		private var grid2:Array;
+		private var grid:Vector.<Vector.<Tile>>;
+		private var grid2:Vector.<Vector.<Tile>>;
 		
 		private var size_x:int;
 		private var size_y:int;
@@ -21,7 +21,7 @@ package
 		 * 
 		 * needs some tweaking of how often and with which parameter to call generateMap()
 		 */
-		public function calculateMap(width:int, heigth:int):Array
+		public function calculateMap(width:int, heigth:int):Vector.<Vector.<Tile>>
 		{
 			size_x = width;
 			size_y = heigth;
@@ -72,13 +72,13 @@ package
 		private function initMap():void 
 		{
 			// create two 2D arrays
-			grid = new Array(size_y);
-			grid2 = new Array(size_y);
+			grid = new  Vector.<Vector.<Tile>>(size_y);
+			grid2 = new Vector.<Vector.<Tile>>(size_y);
 			
 			for (var i:int = 0; i < grid.length; i++) 
 			{
-				grid[i] = new Array(size_x);
-				grid2[i] = new Array(size_x);
+				grid[i] = new Vector.<Tile>(size_x);
+				grid2[i] = new Vector.<Tile>(size_x);
 			}
 			
 			var xi:int, yi:int;
