@@ -43,6 +43,8 @@ package
 				this.processAlgorithm(5, -1);
 			}
 			
+			this.determineTileTypes();
+			
 			// level creation done!
 			return grid;
 		}
@@ -183,6 +185,157 @@ package
 					}
 				}
 			}	
+		}
+		
+		/**
+		 * check which type of wall a tile represtents. Currently, there are 16 different tiles
+		 */
+		private function determineTileTypes():void
+		{
+			var x:int, y:int;
+			
+			// if tile is no wall return
+			if (grid[y][x].isWall() );
+			{
+				for (y = 1; y < grid.length - 1; y++)
+				{
+					for (x = 1; x < grid[y].length - 1; x++)
+					{
+						var tile:Tile = grid[y][x];
+						
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor()  && grid[y][x+1].isFloor() )
+						{
+							// 	...
+							//	.#.
+							//	...
+							tile.setTileID(1);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
+						{
+							//	.#.
+							//	###
+							//	.#.
+							tile.setTileID(2);
+						}
+						
+						// straigth walls
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
+						{
+							// 	.#.
+							//	###
+							//	...
+							tile.setTileID(3);
+						}	
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
+						{
+							//	...
+							//	###
+							//	.#.
+							tile.setTileID(4);
+						}
+						
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
+						{
+							//	...
+							//	###
+							//	...
+							tile.setTileID(5);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isFloor()  && grid[y][x+1].isWall() )
+						{
+							// 	.#.
+							//	.##
+							//	.#.
+							tile.setTileID(6);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isFloor() )
+						{
+							// 	.#.
+							//	##.
+							//	.#.
+							tile.setTileID(7);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isFloor()  && grid[y][x+1].isFloor() )
+						{
+							// 	.#.
+							//	.#.
+							//	.#.
+							tile.setTileID(8);
+						}
+						
+						// diagonal walls
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
+						{
+							//	...
+							//	##.
+							//	.#.
+							tile.setTileID(9);
+						}
+						
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
+						{
+							//	...
+							//	.##
+							//	.#.
+							tile.setTileID(10);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
+						{
+							//	.#.
+							//	##.
+							//	...
+							tile.setTileID(11);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
+						{
+							//	.#.
+							//	.##
+							//	...
+							tile.setTileID(12);
+						}
+						
+						// sharp edges
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isFloor() && grid[y][x+1].isFloor() )
+						{
+							//	...
+							//	.#.
+							//	.#.
+							tile.setTileID(13);
+						}
+						
+						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isFloor() )
+						{
+							//	.#.
+							//	.#.
+							//	...
+							tile.setTileID(14);
+						}
+						
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
+						{
+							//	...
+							//	##.
+							//	...
+							tile.setTileID(15);
+						}
+						
+						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
+						{
+							//	...
+							//	.##
+							//	...
+							tile.setTileID(16);
+						}
+					}
+				}
+			}
 		}
 	}
 }

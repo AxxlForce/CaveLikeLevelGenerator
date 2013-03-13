@@ -6,6 +6,7 @@ package
 	public class Tile
 	{
 		private var tileIsWall:Boolean;
+		private var ID:int;
 		private var xPosition:int;
 		private var yPosition:int;
 		
@@ -36,5 +37,16 @@ package
 		{
 			return this.yPosition;
 		}
+		
+		public function setTileID(initialID:int):void
+		{
+			this.ID = initialID;
+		}
+		
+		public function getTileID():int
+		{
+			return this.ID;
+		}
+
 	}
 }
