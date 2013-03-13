@@ -8,7 +8,7 @@ package
 		{
 			var levelGenerator:LevelGenerator = new LevelGenerator();
 			
-			var level:Array = levelGenerator.calculateMap(64, 24);
+			var level:Vector.<Vector.<Tile>> = levelGenerator.calculateMap(64, 24);
 			
 			printLevel(level);
 		}
@@ -16,7 +16,7 @@ package
 		/**
 		 * print the a level to the console by iterating over our 2D array and printing a char representing each tile
 		 */
-		private function printLevel(level:Array):void
+		private function printLevel(level:Vector.<Vector.<Tile>> ):void
 		{
 			for (var i:int = 0; i < level.length; i++) 
 			{
