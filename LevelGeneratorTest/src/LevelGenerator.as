@@ -7,13 +7,13 @@ package
 	 */
 	public class LevelGenerator
 	{
-		// member variables
+		/** member */
 		private var grid:Vector.<Vector.<Tile>>;
 		private var grid2:Vector.<Vector.<Tile>>;
-		
 		private var size_x:int;
 		private var size_y:int;
 		
+		/** class constants */
 		private const FILL_PROBABILITY:Number = 0.4;
 		
 		/**
@@ -43,7 +43,7 @@ package
 				this.processAlgorithm(5, -1);
 			}
 			
-			this.determineTileTypes();
+			this.determineAllTileTypes();
 			
 			// level creation done!
 			return grid;
@@ -101,14 +101,14 @@ package
 			
 			for (yi = 0; yi < size_y; yi++) {
 				
-				grid[yi][0] = new Tile(true, xi, yi);
-				grid[yi][size_x - 1] = new Tile(true, xi, yi);
+				grid[yi][0] = new Tile(true, 0, yi);
+				grid[yi][size_x - 1] = new Tile(true, size_x - 1, yi);
 			}
 			
 			for (xi = 0; xi < size_x; xi++) {
 				
-				grid[0][xi] = new Tile(true, xi, yi);
-				grid[size_y - 1][xi] = new Tile(true, xi, yi);
+				grid[0][xi] = new Tile(true, xi, 0);
+				grid[size_y - 1][xi] = new Tile(true, xi, size_y - 1);
 			}
 		}
 		
@@ -188,154 +188,218 @@ package
 		}
 		
 		/**
-		 * check which type of wall a tile represtents. Currently, there are 16 different tiles
+		 * determine all tile types
 		 */
-		private function determineTileTypes():void
+		private function determineAllTileTypes():void
 		{
-			var x:int, y:int;
-			
-			// if tile is no wall return
-			if (grid[y][x].isWall() );
+			for (var y:int = 0; y < size_y; y++)
 			{
-				for (y = 1; y < grid.length - 1; y++)
+				for (var x:int = 0; x < size_x; x++)
 				{
-					for (x = 1; x < grid[y].length - 1; x++)
+					// nothing to do if tile is no wall
+					if (grid[y][x].isWall() )
 					{
-						var tile:Tile = grid[y][x];
-						
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor()  && grid[y][x+1].isFloor() )
-						{
-							// 	...
-							//	.#.
-							//	...
-							tile.setTileID(1);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
-						{
-							//	.#.
-							//	###
-							//	.#.
-							tile.setTileID(2);
-						}
-						
-						// straigth walls
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
-						{
-							// 	.#.
-							//	###
-							//	...
-							tile.setTileID(3);
-						}	
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
-						{
-							//	...
-							//	###
-							//	.#.
-							tile.setTileID(4);
-						}
-						
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isWall()  && grid[y][x+1].isWall() )
-						{
-							//	...
-							//	###
-							//	...
-							tile.setTileID(5);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isFloor()  && grid[y][x+1].isWall() )
-						{
-							// 	.#.
-							//	.##
-							//	.#.
-							tile.setTileID(6);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isWall()  && grid[y][x+1].isFloor() )
-						{
-							// 	.#.
-							//	##.
-							//	.#.
-							tile.setTileID(7);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isWall() && grid[y][x-1].isFloor()  && grid[y][x+1].isFloor() )
-						{
-							// 	.#.
-							//	.#.
-							//	.#.
-							tile.setTileID(8);
-						}
-						
-						// diagonal walls
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
-						{
-							//	...
-							//	##.
-							//	.#.
-							tile.setTileID(9);
-						}
-						
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
-						{
-							//	...
-							//	.##
-							//	.#.
-							tile.setTileID(10);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
-						{
-							//	.#.
-							//	##.
-							//	...
-							tile.setTileID(11);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
-						{
-							//	.#.
-							//	.##
-							//	...
-							tile.setTileID(12);
-						}
-						
-						// sharp edges
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isWall() && grid[y][x-1].isFloor() && grid[y][x+1].isFloor() )
-						{
-							//	...
-							//	.#.
-							//	.#.
-							tile.setTileID(13);
-						}
-						
-						if ( grid[y-1][x].isWall() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isFloor() )
-						{
-							//	.#.
-							//	.#.
-							//	...
-							tile.setTileID(14);
-						}
-						
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isWall() && grid[y][x+1].isFloor() )
-						{
-							//	...
-							//	##.
-							//	...
-							tile.setTileID(15);
-						}
-						
-						if ( grid[y-1][x].isFloor() && grid[y+1][x].isFloor() && grid[y][x-1].isFloor() && grid[y][x+1].isWall() )
-						{
-							//	...
-							//	.##
-							//	...
-							tile.setTileID(16);
-						}
+						this.determineTileType(grid[y][x]);
 					}
 				}
 			}
+		}
+
+		/**
+		 * determine which type of wall a tile represtents. Currently, there are 16 different tiles
+		 */
+		private function determineTileType(tile:Tile):void
+		{
+			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				// 	...
+				//	.#.
+				//	...
+				tile.setTileID(1);
+			}
+			
+			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	.#.
+				//	###
+				//	.#.
+				tile.setTileID(2);
+			}
+			
+			// straigth walls
+			if ( !hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				// 	.#.
+				//	###
+				//	...
+				tile.setTileID(3);
+			}	
+			
+			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	...
+				//	###
+				//	.#.
+				tile.setTileID(4);
+			}
+			
+			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	...
+				//	###
+				//	...
+				tile.setTileID(5);
+			}
+			
+			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				// 	.#.
+				//	.##
+				//	.#.
+				tile.setTileID(6);
+			}
+			
+			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				// 	.#.
+				//	##.
+				//	.#.
+				tile.setTileID(7);
+			}
+			
+			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				// 	.#.
+				//	.#.
+				//	.#.
+				tile.setTileID(8);
+			}
+			
+			// diagonal walls
+			if ( !hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				//	...
+				//	##.
+				//	.#.
+				tile.setTileID(9);
+			}
+			
+			if ( !hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	...
+				//	.##
+				//	.#.
+				tile.setTileID(10);
+			}
+			
+			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				//	.#.
+				//	##.
+				//	...
+				tile.setTileID(11);
+			}
+			
+			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	.#.
+				//	.##
+				//	...
+				tile.setTileID(12);
+			}
+			
+			// sharp edges
+			if ( !hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				//	...
+				//	.#.
+				//	.#.
+				tile.setTileID(13);
+			}
+			
+			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				//	.#.
+				//	.#.
+				//	...
+				tile.setTileID(14);
+			}
+			
+			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
+			{
+				//	...
+				//	##.
+				//	...
+				tile.setTileID(15);
+			}
+			
+			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
+			{
+				//	...
+				//	.##
+				//	...
+				tile.setTileID(16);
+			}
+		}
+		
+		private function hasWallToTheTop(tile:Tile):Boolean
+		{
+			var x:int = tile.getXPosition();
+			var y:int = tile.getYPosition();
+			
+			// tile is upper border
+			if ( y <= 0 )
+			{
+				return true;
+			}
+			
+			// normal tile
+			return grid[y-1][x].isWall();
+		}
+		
+		private function hasWallToTheBottom(tile:Tile):Boolean
+		{
+			var x:int = tile.getXPosition();
+			var y:int = tile.getYPosition();
+			
+			// tile is bottom border
+			if ( y+1 >= this.size_y )
+			{
+				return true;
+			}
+			
+			// normal tile
+			return grid[y+1][x].isWall();
+		}
+		
+		private function hasWallToTheLeft(tile:Tile):Boolean
+		{
+			var x:int = tile.getXPosition();
+			var y:int = tile.getYPosition();
+			
+			// tile is left border
+			if ( x <= 0 )
+			{
+				return true;
+			}
+			
+			// normal tile
+			return grid[y][x-1].isWall();
+		}
+		
+		private function hasWallToTheRight(tile:Tile):Boolean
+		{
+			var x:int = tile.getXPosition();
+			var y:int = tile.getYPosition();
+			
+			// tile is right border
+			if ( x+1 >= this.size_x )
+			{
+				return true;
+			}
+			
+			// normal tile
+			return grid[y][x+1].isWall();
 		}
 	}
 }
