@@ -16,7 +16,7 @@ package
 		 * 
 		 * needs some tweaking of how often and with which parameter to call generateMap()
 		 */
-		public function generateMap(width:int, heigth:int):Map
+		public function generateMap(width:int, heigth:int, mode:int):Map
 		{
 			size_x = width;
 			size_y = heigth;
@@ -28,14 +28,45 @@ package
 			//	Winit(p) = rand[0,100) < 40
 			//	Repeat 4: W?(p) = R1(p) ? 5 || R2(p) ? 2
 			//	Repeat 3: W?(p) = R1(p) ? 5 
+			var parameter1:int = 5;
+			var parameter2:int = 2;
+			var parameter3:int = 5;
+			var parameter4:int = -1;
 			
+			if (mode == LevelGenerator.DEFAULT)
+			{
+				// nothing to da as default values are already initialised
+			}
+			else if (mode == LevelGenerator.DISJOINTED)
+			{
+				parameter1 = 5;
+				parameter2 = 2;
+				parameter3 = 5;
+				parameter4 = 0;
+			}
+			else if (mode == LevelGenerator.LARGE_ROOMS)
+			{
+				parameter1 = 5;
+				parameter2 = 2;
+				parameter3 = 5;
+				parameter4 = -2;
+			}
+			else if (mode == LevelGenerator.NARROW_ROOMS)
+			{
+				parameter1 = 5;
+				parameter2 = 2;
+				parameter3 = 4;
+				parameter4 = -1;
+			}
+			
+			// calculating
 			for (var i:int = 0; i < 4; i++) 
 			{
-				this.processAlgorithm(5, 2);
+				this.processAlgorithm(parameter1, parameter2);
 			}
 			for (var j:int = 0; j < 3; j++) 
 			{
-				this.processAlgorithm(5, -1);
+				this.processAlgorithm(parameter3, parameter4);
 			}
 			
 			this.determineAllTileTypes();

@@ -8,7 +8,10 @@ package
 		{
 			var levelGenerator:LevelGenerator = new LevelGenerator();
 			
-			var level:Level = levelGenerator.generateLevel(64, 24);
+			var level:Level = levelGenerator.generateLevel(64, 24, LevelGenerator.DEFAULT);
+			//var level:Level = levelGenerator.generateLevel(64, 24, LevelGenerator.DISJOINTED);
+			//var level:Level = levelGenerator.generateLevel(64, 24, LevelGenerator.LARGE_ROOMS);
+			//var level:Level = levelGenerator.generateLevel(64, 24, LevelGenerator.NARROW_ROOMS);
 			
 			trace ("Level: Width: " + level.map.width + " Height: " + level.map.heigth);
 			trace ("Spawn Point: (" + level.spawnPoint.x + ","  + level.spawnPoint.y + "), Exit Point: (" + level.exitPoint.x + ","  + level.exitPoint.y + ")");
