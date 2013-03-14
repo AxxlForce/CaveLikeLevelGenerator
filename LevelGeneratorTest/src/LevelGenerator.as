@@ -25,7 +25,7 @@ package
 			return new Level(map, spawnPoint, exitPoint);
 		}
 		
-		public function calculateSpawnPoint(map:Map):Coordinate
+		private function calculateSpawnPoint(map:Map):Coordinate
 		{
 			var grid:Vector.<Vector.<Tile>> = map.grid;
 			
@@ -42,7 +42,7 @@ package
 			throw new Error("unable to generate spawn point!");
 		}
 		
-		public function calculateExitPoint(map:Map):Coordinate
+		private function calculateExitPoint(map:Map):Coordinate
 		{
 			var grid:Vector.<Vector.<Tile>> = map.grid;
 			

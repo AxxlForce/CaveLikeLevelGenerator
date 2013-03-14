@@ -6,9 +6,9 @@ package
 	public class Tile
 	{
 		private var tileIsWall:Boolean;
-		private var ID:int;
-		private var xPosition:int;
-		private var yPosition:int;
+		private var _ID:int;
+		private var _x:int;
+		private var _y:int;
 		
 		/**
 		 * creates a tile
@@ -16,11 +16,30 @@ package
 		public function Tile(isWall:Boolean, xPos:int, yPos:int)
 		{
 			this.tileIsWall = isWall;
-			this.yPosition = yPos;
-			this.xPosition = xPos;
+			this._y = yPos;
+			this._x = xPos;
 		}
 		
-		/** getter methods */
+		public function get yPosition():int
+		{
+			return _y;
+		}
+
+		public function get xPosition():int
+		{
+			return _x;
+		}
+
+		public function get ID():int
+		{
+			return _ID;
+		}
+
+		public function set ID(value:int):void
+		{
+			_ID = value;
+		}
+
 		public function isFloor():Boolean
 		{
 			return !tileIsWall;
@@ -29,24 +48,7 @@ package
 		{
 			return tileIsWall;
 		}
-		public function getXPosition():int
-		{
-			return this.xPosition;
-		}
-		public function getYPosition():int
-		{
-			return this.yPosition;
-		}
-		
-		public function setTileID(initialID:int):void
-		{
-			this.ID = initialID;
-		}
-		
-		public function getTileID():int
-		{
-			return this.ID;
-		}
+
 
 	}
 }

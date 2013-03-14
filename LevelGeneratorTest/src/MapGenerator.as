@@ -210,7 +210,7 @@ package
 				// 	...
 				//	.#.
 				//	...
-				tile.setTileID(1);
+				tile.ID = 1;
 			}
 			
 			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -218,7 +218,7 @@ package
 				//	.#.
 				//	###
 				//	.#.
-				tile.setTileID(2);
+				tile.ID = 2;
 			}
 			
 			// straigth walls
@@ -227,7 +227,7 @@ package
 				// 	.#.
 				//	###
 				//	...
-				tile.setTileID(3);
+				tile.ID = 3;
 			}	
 			
 			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -235,7 +235,7 @@ package
 				//	...
 				//	###
 				//	.#.
-				tile.setTileID(4);
+				tile.ID = 4;
 			}
 			
 			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -243,7 +243,7 @@ package
 				//	...
 				//	###
 				//	...
-				tile.setTileID(5);
+				tile.ID = 5;
 			}
 			
 			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -251,7 +251,7 @@ package
 				// 	.#.
 				//	.##
 				//	.#.
-				tile.setTileID(6);
+				tile.ID = 6;
 			}
 			
 			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
@@ -259,7 +259,7 @@ package
 				// 	.#.
 				//	##.
 				//	.#.
-				tile.setTileID(7);
+				tile.ID = 7;
 			}
 			
 			if ( hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
@@ -267,7 +267,7 @@ package
 				// 	.#.
 				//	.#.
 				//	.#.
-				tile.setTileID(8);
+				tile.ID = 8;
 			}
 			
 			// diagonal walls
@@ -276,7 +276,7 @@ package
 				//	...
 				//	##.
 				//	.#.
-				tile.setTileID(9);
+				tile.ID = 9;
 			}
 			
 			if ( !hasWallToTheTop(tile) && hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -284,7 +284,7 @@ package
 				//	...
 				//	.##
 				//	.#.
-				tile.setTileID(10);
+				tile.ID = 10;
 			}
 			
 			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
@@ -292,7 +292,7 @@ package
 				//	.#.
 				//	##.
 				//	...
-				tile.setTileID(11);
+				tile.ID = 11;
 			}
 			
 			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -300,7 +300,7 @@ package
 				//	.#.
 				//	.##
 				//	...
-				tile.setTileID(12);
+				tile.ID = 12;
 			}
 			
 			// sharp edges
@@ -309,7 +309,7 @@ package
 				//	...
 				//	.#.
 				//	.#.
-				tile.setTileID(13);
+				tile.ID = 13;
 			}
 			
 			if ( hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
@@ -317,7 +317,7 @@ package
 				//	.#.
 				//	.#.
 				//	...
-				tile.setTileID(14);
+				tile.ID = 14;
 			}
 			
 			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && hasWallToTheLeft(tile) && !hasWallToTheRight(tile) )
@@ -325,7 +325,7 @@ package
 				//	...
 				//	##.
 				//	...
-				tile.setTileID(15);
+				tile.ID = 15;
 			}
 			
 			if ( !hasWallToTheTop(tile) && !hasWallToTheBottom(tile) && !hasWallToTheLeft(tile) && hasWallToTheRight(tile) )
@@ -333,14 +333,14 @@ package
 				//	...
 				//	.##
 				//	...
-				tile.setTileID(16);
+				tile.ID = 16;
 			}
 		}
 		
 		private function hasWallToTheTop(tile:Tile):Boolean
 		{
-			var x:int = tile.getXPosition();
-			var y:int = tile.getYPosition();
+			var x:int = tile.xPosition;
+			var y:int = tile.yPosition;
 			
 			// tile is upper border
 			if ( y <= 0 )
@@ -354,8 +354,8 @@ package
 		
 		private function hasWallToTheBottom(tile:Tile):Boolean
 		{
-			var x:int = tile.getXPosition();
-			var y:int = tile.getYPosition();
+			var x:int = tile.xPosition;
+			var y:int = tile.yPosition;
 			
 			// tile is bottom border
 			if ( y+1 >= this.size_y )
@@ -369,8 +369,8 @@ package
 		
 		private function hasWallToTheLeft(tile:Tile):Boolean
 		{
-			var x:int = tile.getXPosition();
-			var y:int = tile.getYPosition();
+			var x:int = tile.xPosition;
+			var y:int = tile.yPosition;
 			
 			// tile is left border
 			if ( x <= 0 )
@@ -384,8 +384,8 @@ package
 		
 		private function hasWallToTheRight(tile:Tile):Boolean
 		{
-			var x:int = tile.getXPosition();
-			var y:int = tile.getYPosition();
+			var x:int = tile.xPosition;
+			var y:int = tile.yPosition;
 			
 			// tile is right border
 			if ( x+1 >= this.size_x )

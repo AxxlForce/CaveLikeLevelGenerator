@@ -10,6 +10,7 @@ package
 			
 			var level:Level = levelGenerator.generateLevel(64, 24);
 			
+			trace ("Level: Width: " + level.map.width + " Height: " + level.map.heigth);
 			trace ("Spawn Point: (" + level.spawnPoint.x + ","  + level.spawnPoint.y + "), Exit Point: (" + level.exitPoint.x + ","  + level.exitPoint.y + ")");
 			printLevel(level);
 		}
@@ -45,11 +46,11 @@ package
 			var spawn:Coordinate = level.spawnPoint;
 			var exit:Coordinate = level.exitPoint;
 			
-			if ( (spawn.x == tile.getXPosition()) && (spawn.y == tile.getYPosition()) )
+			if ( (spawn.x == tile.xPosition) && (spawn.y == tile.yPosition) )
 			{
 				return "S";	
 			}
-			if ( (exit.x == tile.getXPosition()) && (exit.y == tile.getYPosition()) )
+			if ( (exit.x == tile.xPosition) && (exit.y == tile.yPosition) )
 			{
 				return "E";	
 			}
@@ -58,7 +59,7 @@ package
 			
 		private function getWallCharacter(tile:Tile):String
 		{
-			switch(tile.getTileID())
+			switch(tile.ID)
 			{
 				case 0:		// unassinged...
 					return "X";
