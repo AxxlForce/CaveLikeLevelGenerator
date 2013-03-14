@@ -16,7 +16,7 @@ package
 		 * 
 		 * needs some tweaking of how often and with which parameter to call generateMap()
 		 */
-		public function generateMap(width:int, heigth:int):Vector.<Vector.<Tile>>
+		public function generateMap(width:int, heigth:int):Map
 		{
 			size_x = width;
 			size_y = heigth;
@@ -41,7 +41,7 @@ package
 			this.determineAllTileTypes();
 			
 			// map creation done!
-			return grid;
+			return new Map(grid);
 		}
 		
 		/**

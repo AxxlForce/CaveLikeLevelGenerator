@@ -2,19 +2,20 @@ package
 {
 	public class Level
 	{
-		private var _grid:Vector.<Vector.<Tile>>;
-		private var _width:int;
-		private var _heigth:int;
+		private var _map:Map;
 		private var _spawnPoint:Coordinate;
 		private var _exitPoint:Coordinate;
 		
-		public function Level(grid:Vector.<Vector.<Tile>>, spawnPoint:Coordinate, exitPoint:Coordinate)
+		public function Level(map:Map, spawnPoint:Coordinate, exitPoint:Coordinate)
 		{
-			this._grid = grid;
-			this._width = grid[0].length;
-			this._heigth = grid.length;
+			this._map = map;
 			this._spawnPoint = spawnPoint;
 			this._exitPoint = exitPoint;
+		}
+
+		public function get map():Map
+		{
+			return _map;
 		}
 
 		public function get exitPoint():Coordinate
@@ -31,21 +32,5 @@ package
 		{
 			_spawnPoint = value;
 		}
-
-		public function get heigth():int
-		{
-			return _heigth;
-		}
-
-		public function get width():int
-		{
-			return _width;
-		}
-
-		public function get grid():Vector.<Vector.<Tile>>
-		{
-			return _grid;
-		}
-
 	}
 }
